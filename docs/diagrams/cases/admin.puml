@@ -4,18 +4,20 @@ left to right direction
 actor Admin
 rectangle "System" as system #lightblue {
  (Login)
- (Open Database)
  (Add Product)
- (Remove Product)
- (Search Products)
- (Recent Orders)
+ (Disable Product)
+ (Enable Product)
+ (Update Product)
+ (View Products)
+ (View Orders)
  (Logout)
 }
 Admin --> (Login)
-Admin --> (Open Database)
 Admin --> (Add Product)
-Admin --> (Remove Product)
-Admin --> (Search Products)
-Admin --> (Recent Orders)
+Admin --> (Disable Product)
+Admin --> (Enable Product)
+Admin --> (Update Product)
+Admin --> (View Products)
+Admin --> (View Orders)
 Admin --> (Logout)
 @enduml
