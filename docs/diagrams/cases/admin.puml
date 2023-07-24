@@ -1,0 +1,13 @@
+@startuml admin
+skinparam actorStyle awesome
+left to right direction
+actor Admin
+rectangle "System" as system {
+  (Login)
+  (Register)
+  (View Cart)
+  (View Items)
+  (View Orders)
+  (View Profile)
+  (Logout)
+}
