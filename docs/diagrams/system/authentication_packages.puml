@@ -9,7 +9,6 @@ package "database" as database #lightblue {
 package "authentication" as authentication #aliceblue {
   rectangle "User Login" as login #lightgreen
   rectangle "User Registration" as register #lightgreen
-  rectangle "User Guest" as guest #lightgray
 }
 
 package "authentication.auth_tools" as authentication.auth_tools #aliceblue {
