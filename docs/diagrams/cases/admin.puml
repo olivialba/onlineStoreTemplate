@@ -4,10 +4,18 @@ left to right direction
 actor Admin
 rectangle "System" as system {
   (Login)
-  (Register)
-  (View Cart)
-  (View Items)
-  (View Orders)
-  (View Profile)
+  (Login as Customer)
+  (Item Database)
+  (User Database)
+  (Search Items)
+  (Recent Orders)
   (Logout)
 }
+Admin --> (Login)
+Admin --> (Login as Customer)
+Admin --> (Item Database)
+Admin --> (User Database)
+Admin --> (Search Items)
+Admin --> (Recent Orders)
+Admin --> (Logout)
+@enduml
