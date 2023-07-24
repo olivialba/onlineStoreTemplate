@@ -2,20 +2,20 @@
 skinparam actorStyle awesome
 left to right direction
 actor Admin
-rectangle "System" as system {
-  (Login)
-  (Login as Customer)
-  (Item Database)
-  (User Database)
-  (Search Items)
-  (Recent Orders)
-  (Logout)
+rectangle "System" as system #lightblue {
+ (Login)
+ (Open Database)
+ (Add Product)
+ (Remove Product)
+ (Search Products)
+ (Recent Orders)
+ (Logout)
 }
 Admin --> (Login)
-Admin --> (Login as Customer)
-Admin --> (Item Database)
-Admin --> (User Database)
-Admin --> (Search Items)
+Admin --> (Open Database)
+Admin --> (Add Product)
+Admin --> (Remove Product)
+Admin --> (Search Products)
 Admin --> (Recent Orders)
 Admin --> (Logout)
 @enduml
