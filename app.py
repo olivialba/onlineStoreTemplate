@@ -62,7 +62,11 @@ def login():
     password = request.form['password']
     if login_pipeline(username, password):
         sessions.add_new_session(username, db)
-        return render_template('home.html', products=products, sessions=sessions)
+        if username == 'Admin':
+            print(f"Special username logged in: {username}")
+            return render_template('home.html', username=username, products=products, sessions=sessions)
+        else: 
+            return render_template('home.html', products=products, sessions=sessions)
     else:
         print(f"Incorrect username ({username}) or password ({password}).")
         return render_template('index.html')
@@ -98,6 +102,10 @@ def register():
         - database/store_records.db: adds a new user to the database
     """
     username = request.form['username']
+    # ERROR: Customers can't have 'admin' in their username
+    if 'admin' in username.lower():
+        return render_template('register.html', admin_error=True)
+    
     password = request.form['password']
     email = request.form['email']
     first_name = request.form['first_name']
