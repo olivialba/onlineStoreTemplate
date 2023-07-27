@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="navbar">
+    <a href="#" onclick="showSection('add')">Add New Product</a>
+    <a href="#" onclick="showSection('remove')">Remove Product</a>
+    <a href="#" onclick="showSection('update')">Update Product</a>
+    <a href="#" onclick="showSection('disable-enable')">Disable/Enable Product</a>
+    <a href="#" onclick="showSection('view-all')">View All Products</a>
+</div>
+
+<div class="container">
+    
+    <!-- Add New Product -->
+    <div class="row" id="add-section">
+        <h2>Add New Product</h2>
+        <form action="/add-product" method="post">
+            <div>
+                <label for="itemname">Item Name:</label>
+                <input type="text" id="itemname" name="itemname">
+            </div>
+            <div>
+                <label for="info">Info:</label>
+                <input type="text" id="info" name="info">
+            </div>
+            <div>
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price">
+            </div>
+            <div>
+                <label for="stock">Stock:</label>
+                <input type="number" id="stock" name="stock">
+            </div>
+            <div>
+                <label for="image_url">Image URL:</label>
+                <input type="text" id="image_url" name="image_url">
+            </div>
+            <div>
+                <label for="category">Category:</label>
+                <input type="text" id="category" name="category">
+            </div>
+            <button type="submit" class="btn btn-primary" id="new_product_button">Add Product</button>
+        </form>
+    </div>
+    <div class="row" id="remove-section">
+        <h2>Remove Product</h2>
+        <button class="btn">Remove</button>
+    </div>
+    <div class="row" id="update-section">
+        <h2>Update Product</h2>
+        <button class="btn">Update</button>
+    </div>
+    <div class="row" id="disable-enable-section">
+        <h2>Disable / Enable Product</h2>
+        <button class="btn">Disable/Enable</button>
+    </div>
+    <div class="row" id="view-all-section">
+        <h2>View All Products</h2>
+        <button class="btn">View</button>
+    </div>
+</div>
+
+<script>
+    function hideAllSections() {
+        const sections = document.querySelectorAll('.row');
+        for (let i = 1; i < sections.length; i++) {
+            sections[i].style.display = 'none';
+        }
+    }
+
+    function showSection(sectionId) {
+        hideAllSections();
+        const sectionToShow = document.getElementById(`${sectionId}-section`);
+        if (sectionToShow) {
+            sectionToShow.style.display = 'block';
+        }
+    }
+
+    // Hide all sections except the first one by default
+    hideAllSections();
+</script>
+
+{% endblock %}

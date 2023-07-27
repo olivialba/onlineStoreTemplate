@@ -27,7 +27,7 @@ class Database:
     # ----------------- INVENTORY ----------------
     # --------------------------------------------
 
-    def insert_new_item(self, item_name: str, price: int, info: str) -> None:
+    def insert_new_item(self, item_name: str, price: int, info: str, stock: int, image_url: str, category: str) -> None:
         """
         Inserts a new item_item into the database.
 
@@ -40,7 +40,7 @@ class Database:
             - None
         """
         self.cursor.execute(
-            "INSERT INTO inventory (item_name, price, info) VALUES (?, ?, ?)", (item_name, price, info))
+            "INSERT INTO inventory (item_name, price, info, stock, image_url, category) VALUES (?, ?, ?, ?, ?, ?)", (item_name, price, info, stock, image_url, category))
         self.connection.commit()
 
     # ------ Getter methods ------

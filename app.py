@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
 
 from authentication.auth_tools import login_pipeline, update_passwords, hash_password
-from database.db import Database
 from flask import Flask, render_template, request
-from core.session import Sessions
+from admin_panel import admin_panel_bp
+from core_info import sessions, db # Sessions and Database
 
 app = Flask(__name__)
+app.register_blueprint(admin_panel_bp) # Register blueprint to connect 'app.py' to 'admin_panel.py'
 HOST, PORT = 'localhost', 8080
 global username, products, db, sessions
 username = 'default'
-db = Database('database/store_records.db')
 products = db.get_full_inventory()
-sessions = Sessions()
 sessions.add_new_session(username, db)
 
 
@@ -144,6 +143,14 @@ def checkout():
 
     return render_template('checkout.html', order=order, sessions=sessions, total_cost=user_session.total_cost)
 
+@app.route('/admin_panel', methods=['POST'])
+def admin_panel():
+    all_sessions = sessions.get_all_sessions()
+    for username in all_sessions:
+        if 'admin' in username.lower():
+            print("Admin verified: proceeding to Admin Panel")
+            return render_template('admin_panel.html', sessions=sessions)
+    return render_template('index.html', username=username, products=products, sessions=sessions)
 
 if __name__ == '__main__':
     app.run(debug=True, host=HOST, port=PORT)
