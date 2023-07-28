@@ -32,6 +32,27 @@ def index_page():
         return render_template('home.html', username=username, products=products, sessions=sessions)
     return render_template('index.html', username=username, products=products, sessions=sessions)
 
+@app.route('/logout')
+def logout():
+    """
+    Logout of a session and renders the index page
+
+    args:
+        - None
+
+    returns:
+        - None
+    """
+    global username
+    products = db.get_full_inventory() # Reload Inventory in case a new product was just added
+    if username == 'default':
+        return render_template('index.html', username=username, products=products, sessions=sessions)
+    else:
+        username = 'default'
+        print(username)
+        print(sessions.get_all_sessions())
+    return render_template('index.html', username=username, products=products, sessions=sessions)
+
 
 @app.route('/login')
 def login_page():
@@ -66,7 +87,6 @@ def login():
     password = request.form['password']
     if login_pipeline(user, password):
         global username
-        sessions.remove_session(username) # Remove previous session
         sessions.add_new_session(user, db) # Add new session
         username = user # Set global username of new session
         if user == 'Admin':
@@ -76,7 +96,7 @@ def login():
             return render_template('home.html', products=products, sessions=sessions)
     else:
         print(f"Incorrect username ({user}) or password ({password}).")
-        return render_template('index.html')
+        return render_template('login.html', login_error=True)
 
 
 @app.route('/register')
@@ -110,8 +130,8 @@ def register():
     """
     username = request.form['username']
     # ERROR: Customers can't have 'admin' in their username
-    if 'admin' in username.lower():
-        return render_template('register.html', admin_error=True)
+    if 'admin' in username.lower() or 'default' in username.lower():
+        return render_template('register.html', register_error=True)
     
     password = request.form['password']
     email = request.form['email']
