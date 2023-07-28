@@ -25,6 +25,11 @@ def index_page():
     returns:
         - None
     """
+    products = db.get_full_inventory() # Reload Inventory in case a new product was just added
+    print(username)
+    print(sessions.get_all_sessions())
+    if username != 'default': # If a user is logged in, re-route to show home.html
+        return render_template('home.html', username=username, products=products, sessions=sessions)
     return render_template('index.html', username=username, products=products, sessions=sessions)
 
 
@@ -57,17 +62,20 @@ def login():
         - sessions: adds a new session to the sessions object
 
     """
-    username = request.form['username']
+    user = request.form['username']
     password = request.form['password']
-    if login_pipeline(username, password):
-        sessions.add_new_session(username, db)
-        if username == 'Admin':
-            print(f"Special username logged in: {username}")
-            return render_template('home.html', username=username, products=products, sessions=sessions)
+    if login_pipeline(user, password):
+        global username
+        sessions.remove_session(username) # Remove previous session
+        sessions.add_new_session(user, db) # Add new session
+        username = user # Set global username of new session
+        if user == 'Admin':
+            print(f"Special username logged in: {user}")
+            return render_template('home.html', username=user, products=products, sessions=sessions)
         else: 
             return render_template('home.html', products=products, sessions=sessions)
     else:
-        print(f"Incorrect username ({username}) or password ({password}).")
+        print(f"Incorrect username ({user}) or password ({password}).")
         return render_template('index.html')
 
 

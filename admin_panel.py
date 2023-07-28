@@ -16,9 +16,22 @@ field_to_db_update = {
     'category_update': db.set_item_category
 }
 
-# Add product in the database
+
 @admin_panel_bp.route('/add-product', methods=['POST'])
 def add_product():
+    """
+    Renders the add-product page when the user is at the `/admin_panel` endpoint with a POST request.
+    Add product to the database.
+
+    args:
+        - None
+
+    returns:
+        - None
+
+    modifies:
+        - database/store_records.db: add a product to the inventory in the database.
+    """
     item_name = request.form['itemname']
     price = request.form['price']
     info = request.form['info']
@@ -28,9 +41,23 @@ def add_product():
     db.insert_new_item(item_name, price, info, stock, image_url, category)
     return render_template('admin_panel.html')
 
-# Edit product in the database
+
 @admin_panel_bp.route('/update-product', methods=['POST'])
 def update_product():
+    """
+    Renders the update-product page when the user is at the `/admin_panel` endpoint with a POST request.
+    Shows product data and allows for product data to be edited in the database.
+
+    args:
+        - None
+
+    returns:
+        - Data: shows product's data in the /update-product page
+
+    modifies:
+        - database/store_records.db: change a product data
+    """
+    
     # Button to search for product in database
     if 'button_send' in request.form and request.form['button_send'] == 'find_product':
         item_id = request.form['itemid']
@@ -49,8 +76,17 @@ def update_product():
         print('Error: Could not detect button pressed. How were you even able to cause this error?')
         return render_template('admin_panel.html')
 
-# Get all Item Data and return them to the page
+
 def get_item_info(item_id: int):
+    """
+    Get all the product data corresponding to the product item_id from the database.
+
+    args:
+        - item_id: integer for product id
+
+    returns:
+        - Render admin_panel page with product/item information
+    """
     check = db.get_item_name_by_id(item_id)
     if check is None: # Couldn't find item ID in database
         return render_template('admin_panel.html', item_not_found=True)
