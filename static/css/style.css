@@ -1,24 +1,18 @@
-ul {
-    list-style-type: none;
-    margin: 0;
+* {
     padding: 0;
-    overflow: hidden;
+    margin: 0;
 }
 
-li {
-    float: left;
+.content {
+    margin-top: 30px;
 }
 
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+h3 {
+    margin-bottom: 0;
 }
 
-li a:hover {
-    background-color: #ebe3e3;
+.container-fluid {
+    padding: 0;
 }
 
 #index_buttons {
@@ -29,12 +23,22 @@ li a:hover {
 }
 
 #login_button {
-    background-color: #4963f4;
+    background-color: #7c8acc;
+    border-color: #ccc;
+    color: rgb(255, 255, 255);
+    width: 100px;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+#register_button {
+    background-color: #5b5e70;
     border-color: #ccc;
     color: rgb(236, 236, 236);
     width: 100px;
     font-weight: bold;
-    margin-top: 10px;
+    margin-top: 15px;
     margin-bottom: 10px;
 }
 
@@ -44,21 +48,8 @@ li a:hover {
     width: 320px;
     background-color: #f5f5f5;
     border: 1px solid #ccc;
-}
-
-#register_button {
-    background-color: #444654;
-    border-color: #ccc;
-    color: rgb(236, 236, 236);
-    width: 100px;
-    font-weight: bold;
-    margin-top: 15px;
-    margin-bottom: 10px;
-}
-
-#info_form_group {
-    margin-top: 10px;
-    width: 200px;
+    text-align: center;
+    justify-content: center;
 }
 
 #register_page {
@@ -129,25 +120,6 @@ li a:hover {
     text-align: center;
 }
 
-
-#count_row {
-    margin: 0 auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    width: 300px;
-    background-color: #fff9f9;
-    border: 1px solid rgb(178, 178, 178);
-    height: 50px;
-
-}
-
-.quanity {
-    margin-left: 130px;
-    margin-right: 130px;
-    text-align: center;
-    font-size: 20px;
-}
-
 #checkout_button {
     background-color: #49f4d8;
     border-color: #ccc;
@@ -161,4 +133,4 @@ li a:hover {
 
 button:hover {
     opacity: 0.8;
-  }
+}
