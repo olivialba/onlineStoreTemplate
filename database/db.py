@@ -81,7 +81,7 @@ class Database:
         returns:
             - The item with the given id.
         """
-        self.cursor.execute("SELECT * FROM inventory WHERE id = ?", (item_id,))
+        self.cursor.execute("SELECT item_name FROM inventory WHERE id = ?", (item_id,))
         return self.cursor.fetchone()
 
     def get_item_info_by_id(self, item_id: int):
@@ -168,7 +168,7 @@ class Database:
             - None
         """
         self.cursor.execute(
-            "UPDATE inventory SET name = ? WHERE id = ?", (new_name, item_id))
+            "UPDATE inventory SET item_name = ? WHERE id = ?", (new_name, item_id))
         self.connection.commit()
 
     def set_item_info(self, item_id: int, new_info: str):

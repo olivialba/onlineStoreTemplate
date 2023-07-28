@@ -1,0 +1,60 @@
+.admin_panel {
+    margin: 0 auto;
+    margin-top: 35px;
+    margin-bottom: 35px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    width: 500px;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+#admin_info {
+    margin-top: 20px;
+}
+
+#admin_text {
+    width: 200px;
+    padding: 10px;
+    margin: 8px 0 auto;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    resize: both;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+#admin_button {
+    background-color: #4963f4;
+    border-color: #ccc;
+    color: rgb(236, 236, 236);
+    font-weight: bold;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.navbar {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar a {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #333; 
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    border-bottom: 1px solid #ccc; 
+}
+
+.navbar a:hover {
+    background-color: #f2f2f2; 
+}
+
+.navbar {
+    text-align: center;
+}

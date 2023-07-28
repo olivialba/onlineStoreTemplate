@@ -1,55 +1,71 @@
 {% extends "layout.html" %}
 
 {% block content %}
-
+<!-- By Alberto Olivi -->
 <div class="navbar">
     <a href="#" onclick="showSection('add')">Add New Product</a>
     <a href="#" onclick="showSection('remove')">Remove Product</a>
     <a href="#" onclick="showSection('update')">Update Product</a>
     <a href="#" onclick="showSection('disable-enable')">Disable/Enable Product</a>
     <a href="#" onclick="showSection('view-all')">View All Products</a>
+    <p id="demo"></p>
 </div>
 
 <div class="container">
     
     <!-- Add New Product -->
     <div class="row" id="add-section">
-        <h2>Add New Product</h2>
         <form action="/add-product" method="post">
-            <div>
-                <label for="itemname">Item Name:</label>
-                <input type="text" id="itemname" name="itemname">
+            <div class="admin_panel">
+                <h2>Add New Product</h2><br>
+                <label id="admin_info">Item Name: </label><br><input type="text" name="itemname" id="admin_text" placeholder="Enter Item Name"><br>
+                <label id="admin_info">Info: </label><br><textarea name="info" id="admin_text" placeholder="Enter Info" style="width: 60%"></textarea><br>
+                <label id="admin_info">Price: </label><br><input type="number" name="price" id="admin_text" placeholder="Enter Price"><br>
+                <label id="admin_info">Stock: </label><br><input type="number" name="stock" id="admin_text" placeholder="Enter Stock Amount"><br>
+                <label id="admin_info">Image URL: </label><br><input type="text" name="image_url" id="admin_text" placeholder="Enter Image Url"><br>
+                <label id="admin_info">Category: </label><br><input type="text" name="category" id="admin_text" placeholder="Enter Category"><br>
+                <button type="submit" class="btn btn-primary" id="admin_button">Add Product</button><br>
             </div>
-            <div>
-                <label for="info">Info:</label>
-                <input type="text" id="info" name="info">
-            </div>
-            <div>
-                <label for="price">Price:</label>
-                <input type="number" id="price" name="price">
-            </div>
-            <div>
-                <label for="stock">Stock:</label>
-                <input type="number" id="stock" name="stock">
-            </div>
-            <div>
-                <label for="image_url">Image URL:</label>
-                <input type="text" id="image_url" name="image_url">
-            </div>
-            <div>
-                <label for="category">Category:</label>
-                <input type="text" id="category" name="category">
-            </div>
-            <button type="submit" class="btn btn-primary" id="new_product_button">Add Product</button>
         </form>
     </div>
     <div class="row" id="remove-section">
         <h2>Remove Product</h2>
         <button class="btn">Remove</button>
     </div>
+
+    <!-- Update Product -->
     <div class="row" id="update-section">
-        <h2>Update Product</h2>
-        <button class="btn">Update</button>
+        <form action="/update-product" method="post">
+            <div class="admin_panel">
+                <h2>Update product</h2><br>
+                <label id="admin_info">Item ID: </label><br><input type="text" name="itemid" id="admin_text" placeholder="Enter Item id"><br>
+                <button type="submit" class="btn btn-primary" name="button_send" value="find_product" id="admin_button">Find Product</button><br>
+                {% if item_not_found %}
+                <hr>
+                <h2>Item not found</h2>
+                {% endif %}
+                {% if item_found %}
+                <hr>
+                <h2>Item Found</h2>
+                <hr>
+                <label id="admin_info"><b>ID: {{ item_id }}</b></label><br>
+                <input type="hidden" name="id_update" value="{{ item_id }}">
+                <label id="admin_info"><b>Item Name: </b></label><br>{{ name }}<br>
+                <input type="text" name="itemname_update" id="admin_text" placeholder="New Item Name"><br>
+                <label id="admin_info"><b>Info: </b></label><br>{{ info }}<br>
+                <textarea name="info_update" id="admin_text" placeholder="New Info" style="width: 60%"></textarea><br>
+                <label id="admin_info"><b>Price: </b></label><br>{{ price }}<br>
+                <input type="text" name="price_update" id="admin_text" placeholder="New Price"><br>
+                <label id="admin_info"><b>Stock: </b></label><br>{{ stock }}<br>
+                <input type="text" name="stock_update" id="admin_text" placeholder="New Stock Amount"><br>
+                <label id="admin_info"><b>Image Url: </b></label><br>{{ image_url }}<br>
+                <input type="text" name="image_url_update" id="admin_text" placeholder="New Image Url"><br>
+                <label id="admin_info"><b>Category: </b></label><br>{{ category }}<br>
+                <input type="text" name="category_update" id="admin_text" placeholder="New Category"><br>
+                <button type="submit" class="btn btn-primary" name="button_send" value="update_product" id="admin_button">Update Product</button><br>
+                {% endif %}
+            </div>
+        </form>
     </div>
     <div class="row" id="disable-enable-section">
         <h2>Disable / Enable Product</h2>
@@ -74,11 +90,15 @@
         const sectionToShow = document.getElementById(`${sectionId}-section`);
         if (sectionToShow) {
             sectionToShow.style.display = 'block';
+            // If page is reloaded (because of a button or new information to displau), keep this nav bar selection to be shown
+            sessionStorage.setItem('navbar-selection', sectionId); 
         }
     }
-
-    // Hide all sections except the first one by default
     hideAllSections();
+    window.onload = function() {
+            var section = sessionStorage.getItem('navbar-selection');
+            showSection(section);
+        };
 </script>
 
 {% endblock %}
