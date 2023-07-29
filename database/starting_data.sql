@@ -14,13 +14,16 @@ INSERT into `users` (`username`, `password_hash`, `email`, `first_name`, `last_n
 VALUES ('Admin', 'f90747b096a0bb34bcae8ed0b623367ac42aac304853f446957b37314a2c07606b7c292dfc9e1e672cec634365b02f863bfd9b9217c44f8756366da2994955a4', 'admin@gmail.com', 'Admin', 'Admin');
 
 INSERT into `inventory` (`item_name`, `info`, `price`, `stock`, `image_url`, `category`)
-VALUES ('Apples', 'An edible cultivation of the Malus genus.', 2.00, 100, 'static/images/apple.jpeg', 'Fruit');
+VALUES ('A Little Life', 'A novel by Hanya Yanagihara following the lives of four friends, grappling with love, trauma, and resilience, while one carries a haunting past.', 14.99, 49, 'static/books/a_little_life.jpg', 'Literary fiction');
 
 INSERT into `inventory` (`item_name`, `info`, `price`, `stock`, `image_url`, `category`)
-VALUES ('Bananas', 'A long curved fruit which grows in clusters and has soft pulpy flesh and yellow skin when ripe.', 1.00, 100, 'static/images/banana.jpeg', 'Fruit');
+VALUES ('American Prometheus', 'Kai Bird and Martin J. Sherwin"s biography explores the life of physicist J. Robert Oppenheimer, his scientific achievements, controversies, and tragedies.', 22.49, 26, 'static/books/american_prometheus.jpg', 'Biography');
 
 INSERT into `inventory` (`item_name`, `info`, `price`, `stock`, `image_url`, `category`)
-VALUES ('Mangos', 'The best fruit on the planet.', 4.00, 100, 'static/images/mango.jpeg', 'Fruit');
+VALUES ('Archers Voice', 'Mia Sheridan"s heartwarming romance about Archer Hale, a mute man haunted by his past, and Bree Prescott, who brings healing and love into his life.', 30.00, 28, 'static/books/archers_voice.jpg', 'Romance fiction');
+
+INSERT into `inventory` (`item_name`, `info`, `price`, `stock`, `image_url`, `category`)
+VALUES ('House of Earth and Blood', 'Sarah J. Maas"s captivating fantasy follows Bryce Quinlan and Hunt Athalar as they seek justice in a city of intrigue.', 16.99, 34, 'static/books/house_of_earth_and_blood.jpg', 'Fantasy fiction');
 
 INSERT into `sales` (`transaction_id`, `username`, `item_id`, `quantity`, `sale_date`, `cost`)
 VALUES ('1', 'aturing', '1', 10, '2022-12-21 7:30:30', 5.50);
