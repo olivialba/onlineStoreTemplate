@@ -74,12 +74,13 @@ h3 {
     width: 302px;
     background-color: #cac2c2;
     border: 1px solid rgb(178, 178, 178);
-    height: 500px;
+    height: 550px;
 }
 
 .product_card-img {
-    width: 300px;
+    width: auto;
     height: 300px;
+    padding-top: 15px;
 }
 
 .product_card-title {
@@ -94,16 +95,15 @@ h3 {
 .product_card-text {
     text-align: center;
     font-size: 15px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 10px 5px;
     font-style: italic;
-    height: 60px;
+    height: 70px;
 }
 
 .product_card-price {
     text-align: center;
     font-size: 15px;
-    margin-top: 10px;
+    margin-top: 25px;
     margin-bottom: 10px;
     font-weight: bold;
     font-style: italic;
