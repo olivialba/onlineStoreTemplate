@@ -5,11 +5,11 @@
 - Added `Admin Panel`
 - Added Header
 - Added Logout
-- Changed Login and Register buttons
 - Added Homepage navbar
 - Added customers can't register with 'admin' in their username
-- Added backend for login-register-logout
+- Added Books products to starting_data
 - Changed overall CSS style of the website
+- Changed Login and Register buttons
 
 ### Admin Panel:
 - Bookstoremanager login will show an Admin panel, the panel is defined in 'admin_panel.html' and 'admin_panel.py'
@@ -24,3 +24,4 @@
 - Fixed: login users didn't change session to their new login
 - Fixed: customers can't login if username or password invalid
 - Fixed: incorrect and uneven css style for login and register .html pages
+- Fixed: Incorrect backend for login-logout
