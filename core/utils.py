@@ -47,7 +47,7 @@ def calculate_total_cost(items: dict) -> float:
         - The total cost of the sale as a float.
     """
     total_cost = 0
-    print(items)
+    #print(items)
     for i in items:
         item = items[i]
         total_cost += calculate_cost(float(item["price"]), int(item["quantity"]),

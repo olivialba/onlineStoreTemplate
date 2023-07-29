@@ -26,8 +26,6 @@ def index_page():
         - None
     """
     products = db.get_full_inventory() # Reload Inventory in case a new product was just added
-    print(username)
-    print(sessions.get_all_sessions())
     if username != 'default': # If a user is logged in, re-route to show home.html
         return render_template('home.html', username=username, products=products, sessions=sessions)
     return render_template('index.html', username=username, products=products, sessions=sessions)
@@ -49,8 +47,6 @@ def logout():
         return render_template('index.html', username=username, products=products, sessions=sessions)
     else:
         username = 'default'
-        print(username)
-        print(sessions.get_all_sessions())
     return render_template('index.html', username=username, products=products, sessions=sessions)
 
 
@@ -87,13 +83,13 @@ def login():
     password = request.form['password']
     if login_pipeline(user, password):
         global username
-        sessions.add_new_session(user, db) # Add new session
+        if (user not in sessions.get_all_sessions()): # Add new session only if session didn't already exist, keep cart items even after log out 
+            sessions.add_new_session(user, db)
         username = user # Set global username of new session
+
         if user == 'Admin':
             print(f"Special username logged in: {user}")
-            return render_template('home.html', username=user, products=products, sessions=sessions)
-        else: 
-            return render_template('home.html', products=products, sessions=sessions)
+        return render_template('home.html', username=username, products=products, sessions=sessions)
     else:
         print(f"Incorrect username ({user}) or password ({password}).")
         return render_template('login.html', login_error=True)
@@ -129,7 +125,7 @@ def register():
         - database/store_records.db: adds a new user to the database
     """
     username = request.form['username']
-    # ERROR: Customers can't have 'admin' in their username
+    # ERROR: Customers can't have 'admin' or 'default' in their username
     if 'admin' in username.lower() or 'default' in username.lower():
         return render_template('register.html', register_error=True)
     
@@ -160,15 +156,15 @@ def checkout():
     order = {}
     user_session = sessions.get_session(username)
     for item in products:
-        print(f"item ID: {item['id']}")
+        #print(f"item ID: {item['id']}")
         if request.form[str(item['id'])] > '0':
-            count = request.form[str(item['id'])]
+            count = request.form[str(item['id'])] # Get quantity inputted. Quantity text-bar: name={{product.id}}
             order[item['item_name']] = count
             user_session.add_new_item(
                 item['id'], item['item_name'], item['price'], count)
 
     user_session.submit_cart()
-
+    print("Cart: ", user_session.get_cart_with_quantity())
     return render_template('checkout.html', order=order, sessions=sessions, total_cost=user_session.total_cost)
 
 @app.route('/admin_panel', methods=['POST'])

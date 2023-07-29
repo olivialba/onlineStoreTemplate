@@ -71,7 +71,7 @@ class UserSession:
             - None
         """
         self.cart[id] = {"name": name, "price": price, "quantity": quantity,
-                         "discount": discount, "tax_rate": tax_rate}
+                        "discount": discount, "tax_rate": tax_rate}
 
     def update_item_quantity(self, id: str, change_to_quantity: int) -> None:
         """
@@ -100,6 +100,23 @@ class UserSession:
         Updates the total cost of the user's cart.
         """
         self.total_cost = calculate_total_cost(self.cart)
+        
+    def get_cart_with_quantity(self) -> dict:
+        """
+        Returns the items in the cart with quantity over 0.
+        
+        returns:
+            - Items in the cart with quantity > 0.
+        """
+        full_cart = self.cart.copy()
+        items_to_remove = []
+        
+        for item_id, item in self.cart.items():
+            if item['quantity'] == 0:
+                items_to_remove.append(item_id)
+        for item_id in items_to_remove:
+            del full_cart[item_id]
+        return full_cart
 
     def submit_cart(self) -> None:
         """
