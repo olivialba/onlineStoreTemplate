@@ -165,7 +165,7 @@ def checkout():
 
     user_session.submit_cart()
     print("Cart: ", user_session.get_cart_with_quantity())
-    return render_template('checkout.html', order=order, sessions=sessions, total_cost=user_session.total_cost)
+    return render_template('checkout.html', order=order, sessions=sessions, total_cost=user_session.total_cost, cart=user_session.get_cart_with_quantity())
 
 @app.route('/admin_panel', methods=['POST'])
 def admin_panel():

@@ -120,7 +120,7 @@ class UserSession:
                 discount = float(item['discount'])
                 tax_rate = float(item['tax_rate'])
                 subtotal = (price * quantity) * (1 - discount) * (1 + tax_rate)
-                item_info['subtotal'] = round(subtotal, 2)
+                item['subtotal'] = round(subtotal, 2)
         for item_id in items_to_remove:
             del full_cart[item_id]
         return full_cart
