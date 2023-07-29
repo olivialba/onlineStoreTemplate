@@ -51,7 +51,7 @@ def calculate_total_cost(items: dict) -> float:
     for i in items:
         item = items[i]
         total_cost += calculate_cost(float(item["price"]), int(item["quantity"]),
-                                     float(item["discount"]), int(item["tax_rate"]))
+                                     float(item["discount"]), float(item["tax_rate"]))
     return total_cost
 
 
