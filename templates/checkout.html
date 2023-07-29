@@ -6,26 +6,33 @@
         <h3>Your Order</h3>
         <hr>
         <div class="row" id="product_page">
-            <table class="cart-table">
-                <tr>
-                    <th>Product</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Subtotal</th>
-                </tr>
-                {% for item_id, item_info in cart.items() %}
+            <form method="post" action="/checkout-update" id="cart-table-form">
+                <table class="cart-table">
                     <tr>
-                        <td>{{ item_info.name }}</td>
-                        <td>${{ item_info.price }}</td>
-                        <td>{{ item_info.quantity }}</td>
-                        <td>${{ item_info.subtotal }}</td>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                        <th>Change Quantity</th>
                     </tr>
-                {% endfor %}
-                <tr class="total-row">
-                    <td colspan="3">Total:</td>
-                    <td>${{ total_cost }}</td>
-                </tr>
-            </table>
+                    {% for item_id, item_info in cart.items() %}
+                        <tr>
+                            <td>{{ item_info.name }}</td>
+                            <td>${{ '{:.2f}'.format(item_info.price) }}</td>
+                            <td>{{ item_info.quantity }}</td>
+                            <td>${{ '{:.2f}'.format(item_info.subtotal) }}</td>
+                            <td>
+                                <input type="number" name="{{ item_id }}" value="{{ item_info.quantity }}" min="0" max="100" step="1" oninput="this.value = Math.abs(this.value)">
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <tr class="total-row">
+                        <td colspan="3">Total:</td>
+                        <td>${{ '{:.2f}'.format(total_cost) }}</td>
+                        <td><button type="submit" class="btn btn-primary">Update Quantity</button></td>
+                    </tr>
+                </table>
+            </form>
         </div>
     </div>
 </div>

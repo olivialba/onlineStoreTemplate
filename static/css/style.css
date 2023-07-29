@@ -140,12 +140,15 @@ button:hover {
     justify-content: center;
 }
 
+#cart-table-form {
+    min-width: 600px;
+    max-width: 900px;
+}
+
 .cart-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
-    min-width: 600px;
-    max-width: 900px;
 }
 
 .cart-table th, .cart-table td {

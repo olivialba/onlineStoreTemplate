@@ -53,7 +53,7 @@ def calculate_total_cost(items: dict) -> float:
         item = items[i]
         total_cost += calculate_cost(float(item["price"]), int(item["quantity"]),
                                      float(item["discount"]), float(item["tax_rate"]))
-    return total_cost
+    return round(total_cost, 2)
 
 
 def generate_unique_id() -> str:

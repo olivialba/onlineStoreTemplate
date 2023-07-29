@@ -81,10 +81,10 @@ class UserSession:
             - id: The id of the item.
             - quantity: The quantity of the item.
         """
-        if self.cart[id]["quantity"] + change_to_quantity <= 0:
+        if change_to_quantity <= 0:
             self.remove_item(id)
         else:
-            self.cart[id]["quantity"] += change_to_quantity
+            self.cart[id]["quantity"] = change_to_quantity
 
     def remove_item(self, id: str) -> None:
         """
