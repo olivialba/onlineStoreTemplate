@@ -112,8 +112,15 @@ class UserSession:
         items_to_remove = []
         
         for item_id, item in self.cart.items():
-            if item['quantity'] == 0:
+            if int(item['quantity']) <= 0:
                 items_to_remove.append(item_id)
+            else:
+                price = float(item['price'])
+                quantity = int(item['quantity'])
+                discount = float(item['discount'])
+                tax_rate = float(item['tax_rate'])
+                subtotal = (price * quantity) * (1 - discount) * (1 + tax_rate)
+                item_info['subtotal'] = round(subtotal, 2)
         for item_id in items_to_remove:
             del full_cart[item_id]
         return full_cart
