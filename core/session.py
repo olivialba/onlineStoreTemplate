@@ -42,6 +42,12 @@ class UserSession:
             new_cart[item["id"]] = {"name": item["item_name"], "price": item["price"], "quantity": 0,
                                     "discount": 0, "tax_rate": 0}
         return new_cart
+    
+    def reset_cart(self):
+        """
+        Reset the user's cart
+        """
+        self.cart = self.empty_cart()
 
     def is_item_in_cart(self, id: str) -> bool:
         """
@@ -124,7 +130,19 @@ class UserSession:
         for item_id in items_to_remove:
             del full_cart[item_id]
         return full_cart
+    
+    def update_date(self) -> None:
+        """
+        Update the data of the sale.
 
+        args:
+            - None
+
+        returns:
+            - None
+        """
+        self.date = datetime.now()
+        
     def submit_cart(self) -> None:
         """
         Called when the order is submitted. Finalizes user session details.

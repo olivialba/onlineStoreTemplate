@@ -61,7 +61,7 @@ def login_page():
     returns:
         - None
     """
-    return render_template('login.html')
+    return render_template('login.html', username=username)
 
 
 @app.route('/home', methods=['POST'])
@@ -106,7 +106,7 @@ def register_page():
     returns:
         - None
     """
-    return render_template('register.html')
+    return render_template('register.html', username=username)
 
 
 @app.route('/register', methods=['POST'])
@@ -156,7 +156,6 @@ def checkout():
     order = {}
     user_session = sessions.get_session(username)
     for item in products:
-        #print(f"item ID: {item['id']}")
         if request.form[str(item['id'])] > '0':
             count = request.form[str(item['id'])] # Get quantity inputted. Quantity text-bar: name={{product.id}}
             order[item['item_name']] = count
@@ -172,21 +171,44 @@ def checkout():
 def reload_checkout_page():
     """
     Renders the checkout page when the user is at the `/checkout-update` endpoint with a POST request.
-    Update cart quantity and renders the checkout page with new information.
+    Update cart quantity or create a new sale, and renders the checkout page with new information.
 
     args:
         - None
 
     returns:
-        - Update items at checkout
+        - None
+
+    modifies:
+        - Update: Update quantity of an item in the user session's cart
+        - New Sale: Create a new sale in the database and empties cart
     """
     user_session = sessions.get_session(username)
     cart = user_session.get_cart_with_quantity()
-    for item_id, item_info in cart.items():
-        new_quantity = int(request.form[str(item_id)])
-        user_session.update_item_quantity(item_id, new_quantity)
+    if 'update_checkout' in request.form:
+        for item_id, item_info in cart.items():
+            new_quantity = int(request.form[str(item_id)])
+            user_session.update_item_quantity(item_id, new_quantity)
+        print('Quantity updated')
+    elif 'send_checkout' in request.form:
+        transaction_id = db.get_new_sale_transaction_id()
+        user_session.update_date()
+        for item_id, item_info in cart.items():
+            db.insert_new_sale(transaction_id, username, item_id, item_info['quantity'], user_session.date, item_info['subtotal'])
+        user_session.reset_cart()
+        print('Sale added')
     user_session.submit_cart()
-    return render_template('checkout.html', sessions=sessions, total_cost=user_session.total_cost, cart=user_session.get_cart_with_quantity())
+    return render_template('checkout.html', sessions=sessions, sale_made=True, total_cost=user_session.total_cost, cart=user_session.get_cart_with_quantity())
+        
+
+@app.route('/orders', methods=['GET'])
+def orders_page():
+    if username == 'default':
+        return render_template('orders.html', no_user_error=True)
+    else:
+        sales = db.get_sales_by_username(username)
+        print(sales)
+        return render_template('orders.html', sales=sales)
 
 
 @app.route('/admin_panel', methods=['POST'])

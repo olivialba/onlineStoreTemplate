@@ -67,3 +67,15 @@ def generate_unique_id() -> str:
         - A unique ID as a string.
     """
     return str(uuid.uuid4())
+
+def generate_transaction_id(length) -> str:
+    """
+    Generates a unique transaction ID with 5 characters.
+
+    args:
+        - None
+
+    returns:
+        - A unique transaction ID as a string.
+    """
+    return str(uuid.uuid4())[:length]

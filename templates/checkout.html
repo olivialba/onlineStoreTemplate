@@ -3,7 +3,7 @@
 {% block content %}
 <div class="row" id="products_page">
     <div class="col-md-12">
-        <h3>Your Order</h3>
+        <h3>Your Checkout</h3>
         <hr>
         <div class="row" id="product_page">
             <form method="post" action="/checkout-update" id="cart-table-form">
@@ -13,7 +13,9 @@
                         <th>Price</th>
                         <th>Quantity</th>
                         <th>Subtotal</th>
+                        {% if  total_cost  != 0 %}
                         <th>Change Quantity</th>
+                        {% endif %}
                     </tr>
                     {% for item_id, item_info in cart.items() %}
                         <tr>
@@ -29,9 +31,12 @@
                     <tr class="total-row">
                         <td colspan="3">Total:</td>
                         <td>${{ '{:.2f}'.format(total_cost) }}</td>
-                        <td><button type="submit" class="btn btn-primary">Update Quantity</button></td>
+                        {% if  total_cost  != 0 %}
+                        <td><button type="submit" class="btn btn-primary" name="update_checkout" id="checkout_page_button">Update Quantity</button></td>
+                        {% endif %}
                     </tr>
                 </table>
+                <button type="submit" class="btn btn-primary" name="send_checkout" id="checkout_page_button">Send Order</button>
             </form>
         </div>
     </div>

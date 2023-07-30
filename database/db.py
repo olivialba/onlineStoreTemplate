@@ -1,4 +1,4 @@
-from core.utils import dict_factory, calculate_cost
+from core.utils import dict_factory, calculate_cost, generate_transaction_id
 import datetime as dt
 import sqlite3
 
@@ -425,6 +425,17 @@ class Database:
         self.connection.commit()
 
     # ------ Getter methods ------
+    def get_new_sale_transaction_id(self):
+        """
+        Create a new unique transaction ID.
+
+        args:
+            - None
+
+        returns:
+            - Unique transaction ID.
+        """
+        return generate_transaction_id(5)
 
     def get_full_sales_information(self):
         """
