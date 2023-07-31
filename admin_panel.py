@@ -16,7 +16,7 @@ field_to_db_update = {
 }
 
 
-@admin_panel_bp.route('/add-product', methods=['POST'])
+@admin_panel_bp.route('/admin_panel/add-product', methods=['POST'])
 def add_product():
     """
     Renders the add-product page when the user is at the `/admin_panel` endpoint with a POST request.
@@ -41,7 +41,7 @@ def add_product():
     return render_template('admin_panel.html')
 
 
-@admin_panel_bp.route('/update-product', methods=['POST'])
+@admin_panel_bp.route('/admin_panel/update-product', methods=['POST'])
 def update_product():
     """
     Renders the update-product page when the user is at the `/admin_panel` endpoint with a POST request.
@@ -76,7 +76,7 @@ def update_product():
         return render_template('admin_panel.html')
     
 
-@admin_panel_bp.route('/view-inventory', methods=['GET'])
+@admin_panel_bp.route('/admin_panel/view-inventory', methods=['POST']) # With 'GET' you can go directly to the url even without admin access or log in?
 def view_inventory():
     """
     Renders the inventory products when the user is at the `/view-products` endpoint with a GET request.
