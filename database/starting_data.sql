@@ -26,10 +26,10 @@ INSERT into `inventory` (`item_name`, `info`, `price`, `stock`, `image_url`, `ca
 VALUES ('House of Earth and Blood', 'Sarah J. Maas"s captivating fantasy follows Bryce Quinlan and Hunt Athalar as they seek justice in a city of intrigue.', 16.99, 34, 'static/books/house_of_earth_and_blood.jpg', 'Fantasy fiction');
 
 INSERT into `sales` (`transaction_id`, `username`, `item_id`, `quantity`, `sale_date`, `cost`)
-VALUES ('1', 'aturing', '1', 2, '2022-12-27 7:30:30', 31.48);
+VALUES ('c8c1d', 'aturing', '1', 2, '2022-12-27 7:30:30', 31.48);
 
 INSERT into `sales` (`transaction_id`, `username`, `item_id`, `quantity`, `sale_date`, `cost`)
-VALUES ('2', 'dritchie', '2', 3, '2021-11-17 7:30:30', 70.84);
+VALUES ('3f1e2', 'dritchie', '2', 3, '2021-11-17 7:30:30', 70.84);
 
 INSERT into `sales` (`transaction_id`, `username`, `item_id`, `quantity`, `sale_date`, `cost`)
-VALUES ('3', 'llamport', '3', 1, '2020-12-13 7:30:30', 31.50);
+VALUES ('b4d7r', 'llamport', '3', 1, '2020-12-13 7:30:30', 31.50);

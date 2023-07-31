@@ -104,7 +104,14 @@ h3 {
     font-size: 15px;
     margin: 10px 5px;
     font-style: italic;
-    height: 70px;
+    height: 75px;
+}
+
+.product_card-stock {
+    text-align: center;
+    font-size: 15px;
+    margin: 10px 5px;
+    font-style: italic;
 }
 
 .product_card-price {

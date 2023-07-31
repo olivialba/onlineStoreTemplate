@@ -190,16 +190,27 @@ def reload_checkout_page():
             new_quantity = int(request.form[str(item_id)])
             user_session.update_item_quantity(item_id, new_quantity)
         print('Quantity updated')
+        
     elif 'send_checkout' in request.form:
         transaction_id = db.get_new_sale_transaction_id()
         user_session.update_date()
         for item_id, item_info in cart.items():
-            db.insert_new_sale(transaction_id, username, item_id, item_info['quantity'], user_session.date, item_info['subtotal'])
+            item_stock = db.get_item_stock_by_id(item_id)['stock']
+            remaining_stock = item_stock - int(item_info['quantity'])
+            if (remaining_stock >= 0):
+                db.insert_new_sale(transaction_id, username, item_id, item_info['quantity'], user_session.date, item_info['subtotal'])
+                db.set_item_stock(item_id, remaining_stock)
+            else:
+                not_enough_stock = {}
+                item_name = db.get_item_name_by_id(item_id)['item_name']
+                not_enough_stock[item_id] = {'item_name': item_name, 'item_stock': item_stock}
+                return render_template('checkout.html', sessions=sessions, not_enough_stock=not_enough_stock, total_cost=user_session.total_cost, cart=user_session.get_cart_with_quantity())
         user_session.reset_cart()
         if len(cart.items()) == 0:
             print("Cart is empty.")
         else:
             print("Sales added")
+            
     user_session.submit_cart()
     return render_template('checkout.html', sessions=sessions, sale_made=True, total_cost=user_session.total_cost, cart=user_session.get_cart_with_quantity())
         

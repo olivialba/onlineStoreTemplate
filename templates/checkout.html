@@ -36,7 +36,17 @@
                         {% endif %}
                     </tr>
                 </table>
-                <button type="submit" class="btn btn-primary" name="send_checkout" id="checkout_page_button">Send Order</button>
+                {% if not_enough_stock %}
+                    <div class="alert alert-danger">
+                        <p><strong>Item with Not Enough Stocks:</strong></p>
+                        {% for item_id, item_info in not_enough_stock.items() %}
+                            <p>{{ item_info.item_name }} - Stock: {{ item_info.item_stock }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% if  total_cost  != 0 %}
+                    <button type="submit" class="btn btn-primary" name="send_checkout" id="checkout_page_button">Send Order</button>
+                {% endif %}
             </form>
         </div>
     </div>

@@ -190,7 +190,7 @@ class Database:
         """
         Updates the price of an item in the database.
 
-        args:
+        args:f
             - item_id: The id of the item to update.
             - new_price: The new price of the item.
 
