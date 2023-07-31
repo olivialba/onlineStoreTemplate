@@ -1,4 +1,3 @@
-
 # Admin Panel by Alberto Olivi
 
 from authentication.auth_tools import login_pipeline, update_passwords, hash_password
@@ -75,6 +74,24 @@ def update_product():
     else:
         print('Error: Could not detect button pressed. How were you even able to cause this error?')
         return render_template('admin_panel.html')
+    
+
+@admin_panel_bp.route('/view-inventory', methods=['GET'])
+def view_inventory():
+    """
+    Renders the inventory products when the user is at the `/view-products` endpoint with a GET request.
+
+    args:
+        - None
+
+    returns:
+        - None
+
+    modifies:
+        - None
+    """
+    inventory = db.get_full_inventory()
+    return render_template('admin_panel.html', inventory=inventory)
 
 
 def get_item_info(item_id: int):

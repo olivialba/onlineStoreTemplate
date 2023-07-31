@@ -67,3 +67,14 @@
 .navbar a:hover {
     background-color: #f2f2f2; 
 }
+
+.inventory_table {
+    width: 90%; 
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.inventory_table tr, .inventory_table td, .inventory_table th {
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+}

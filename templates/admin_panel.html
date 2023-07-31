@@ -4,9 +4,8 @@
 <!-- By Alberto Olivi -->
 <div class="navbar">
     <a href="#" onclick="showSection('add')">Add New Product</a>
-    <a href="#" onclick="showSection('remove')">Remove Product</a>
     <a href="#" onclick="showSection('update')">Update Product</a>
-    <a href="#" onclick="showSection('view-all')">View All Products</a>
+    <a href="#" onclick="showSection('view-all')">View Inventory</a>
 </div>
 
 <div class="container">
@@ -25,10 +24,6 @@
                 <button type="submit" class="btn btn-primary" id="admin_button">Add Product</button><br>
             </div>
         </form>
-    </div>
-    <div class="admin_selecion" id="remove-section">
-        <h2>Remove Product</h2>
-        <button class="btn">Remove</button>
     </div>
 
     <!-- Update Product -->
@@ -68,8 +63,38 @@
 
     <!-- View All Products -->
     <div class="admin_selecion" id="view-all-section">
-        <h2>View All Products</h2>
-        <button class="btn">View</button>
+        <form action="/view-inventory" method="GET">
+            <div class="admin_panel_menu" style="width: 90%;">
+                <h2>Inventory</h2><br>
+                <button type="submit" class="btn btn-primary" value="view_products" id="admin_button">View Inventory</button><br><br>
+                {% if inventory %}
+                    <table class="inventory_table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Item Name</th>
+                                <th>Info</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Category</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in inventory %}
+                                <tr>
+                                    <td>{{ item.id }}</td>
+                                    <td>{{ item.item_name }}</td>
+                                    <td>{{ item.info }}</td>
+                                    <td>{{ item.price }}</td>
+                                    <td>{{ item.stock }}</td>
+                                    <td>{{ item.category }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
+        </form>
     </div>
 </div>
 
