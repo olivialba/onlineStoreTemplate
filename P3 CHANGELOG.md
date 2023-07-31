@@ -7,7 +7,7 @@
 - **REQ-2:** Users can register account into the database and login - [COMMIT](https://github.com/olivialba/onlineStoreTemplate/commit/9072eacd0b405eebb15afbdb7c6357a643ff2616) - [COMMIT](https://github.com/olivialba/onlineStoreTemplate/commit/9072eacd0b405eebb15afbdb7c6357a643ff2616)
 - **REQ-3:** Users have their cart saved even after logging out - [COMMIT](https://github.com/olivialba/onlineStoreTemplate/commit/1d6dc85768a670a6f7f3af8e7404e2b336209318)
 - **REQ-4:** Customers can now add products to the shopping cart and view the content - [COMMIT](https://github.com/olivialba/onlineStoreTemplate/commit/238ba64e30c9bc58f8ff03d8792e8e08b91e144f)
-- **REQ-5:** `Admin Panel` added. Only accessible through admin login - [COMMIT](https://github.com/olivialba/onlineStoreTemplate/commit/7696795c4466f83ee2be3e97e6510c5d14c7202d)
+- **REQ-5:** `Admin Panel` added to manage some database functions. Only accessible through admin login - [COMMIT](https://github.com/olivialba/onlineStoreTemplate/commit/7696795c4466f83ee2be3e97e6510c5d14c7202d) - [COMMIT](https://github.com/olivialba/onlineStoreTemplate/commit/9f6f53fca778f01a1dee26c16d15a982e1f17028) - [COMMIT](https://github.com/olivialba/onlineStoreTemplate/commit/07e4b425f239c1ac5c1d221a535feda6e2512cfc) - [COMMIT](https://github.com/olivialba/onlineStoreTemplate/commit/7696795c4466f83ee2be3e97e6510c5d14c7202d)
 - **REQ-6:** Customers can checkout product in the index page, but needs to have an account to checkout - [COMMIT](https://github.com/olivialba/onlineStoreTemplate/commit/b96975418ae36ef286ce214c9c54ddfb7066cafc)
 - **REQ-7:** Items are displayed neatly with name, image, info and price - [COMMIT](https://github.com/olivialba/onlineStoreTemplate/commit/a9f203fced50599f64ee3ad2aa8e51ccc65529a1) - [COMMIT](https://github.com/olivialba/onlineStoreTemplate/commit/441ed3288de037ea8bcedc3eafb43a85aafa807f) - [COMMIT](https://github.com/olivialba/onlineStoreTemplate/commit/441ed3288de037ea8bcedc3eafb43a85aafa807f)
 - **REQ-8:** Database storing inventory, sales and users' informations - [COMMIT](https://github.com/olivialba/onlineStoreTemplate/commit/545671b11dc075284acd5c714f931c56a2249de1) - [COMMIT](https://github.com/olivialba/onlineStoreTemplate/commit/a9f203fced50599f64ee3ad2aa8e51ccc65529a1) - [COMMIT](https://github.com/olivialba/onlineStoreTemplate/commit/0a0933441cafe76ac1258b12cb1671568431b363)
@@ -19,7 +19,7 @@
 - Added Logout
 - Added Order Page table to see a user's past orders
 - Added Users can update quantity of items at checkout
-- Changed overall CSS style of the website
+- Changed overall CSS style of the Website
 - Changed Login and Register buttons
 
 ### Admin Panel:
