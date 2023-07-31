@@ -144,6 +144,7 @@ button:hover {
 
 
 /* Checkout Page Table */
+
 #product_page {
     justify-content: center;
 }
@@ -171,4 +172,17 @@ button:hover {
 
 .total-row {
     font-weight: bold;
+}
+
+
+/* Order Page Table */
+
+.order_table {
+    width: 60%; 
+    margin: 0 auto;
+    margin-bottom: 50px;
+}
+
+.order_table tr, .order_table td, .order_table th {
+    padding: 8px 10px;
 }

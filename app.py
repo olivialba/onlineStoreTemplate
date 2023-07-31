@@ -196,7 +196,10 @@ def reload_checkout_page():
         for item_id, item_info in cart.items():
             db.insert_new_sale(transaction_id, username, item_id, item_info['quantity'], user_session.date, item_info['subtotal'])
         user_session.reset_cart()
-        print('Sale added')
+        if len(cart.items()) == 0:
+            print("Cart is empty.")
+        else:
+            print("Sales added")
     user_session.submit_cart()
     return render_template('checkout.html', sessions=sessions, sale_made=True, total_cost=user_session.total_cost, cart=user_session.get_cart_with_quantity())
         
@@ -207,6 +210,7 @@ def orders_page():
         return render_template('orders.html', no_user_error=True)
     else:
         sales = db.get_sales_by_username(username)
+        # Sorting it here, because it's more compact and doing it in the .html would be more complicated
         print(sales)
         return render_template('orders.html', sales=sales)
 
