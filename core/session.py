@@ -141,7 +141,8 @@ class UserSession:
         returns:
             - None
         """
-        self.date = datetime.now()
+        now = datetime.now()
+        self.date = now.strftime('%m-%d-%Y %H:%M:%S') # Otherwise it would display decimals for the seconds
         
     def submit_cart(self) -> None:
         """
