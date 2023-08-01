@@ -6,6 +6,10 @@ from core_info import sessions, db
 
 admin_panel_bp = Blueprint('admin_panel', __name__)
 
+"""
+Used to update product info
+First is textfield from which to take value, second is method to use to update said value
+"""
 field_to_db_update = {
     'itemname_update': db.set_item_name,
     'info_update': db.set_item_info,
@@ -19,7 +23,7 @@ field_to_db_update = {
 @admin_panel_bp.route('/admin_panel/add-product', methods=['POST'])
 def add_product():
     """
-    Renders the add-product page when the user is at the `/admin_panel` endpoint with a POST request.
+    Renders the add-product request when the user is at the `/admin_panel/add-product` endpoint with a POST request.
     Add product to the database.
 
     args:
@@ -37,14 +41,23 @@ def add_product():
     stock = request.form['stock']
     image_url = request.form['image_url']
     category = request.form['category']
+    if not item_name or not price or not info or not stock or not image_url or not category: # All fields needs to be filled
+        return render_template('admin_panel.html', empty_field=True)
+    price = float(price)
+    stock = float(stock)
+    if not stock.is_integer(): # Stock needs to be full integer
+        return render_template('admin_panel.html', stock_not_integer=True)
+    if price < 0 or stock < 0: # Price and stock can't be negative, but can be zero
+        return render_template('admin_panel.html', negative_number=True)
     db.insert_new_item(item_name, price, info, stock, image_url, category)
-    return render_template('admin_panel.html')
+    print("Product added")
+    return render_template('admin_panel.html', product_added=True)
 
 
 @admin_panel_bp.route('/admin_panel/update-product', methods=['POST'])
 def update_product():
     """
-    Renders the update-product page when the user is at the `/admin_panel` endpoint with a POST request.
+    Renders the update-product page when the user is at the `/admin_panel/update-product` endpoint with a POST request.
     Shows product data and allows for product data to be edited in the database.
 
     args:
@@ -65,10 +78,10 @@ def update_product():
     # Button to update a product in database
     elif 'button_send' in request.form and request.form['button_send'] == 'update_product':
         item_id = request.form['id_update']
-        for field, update_func in field_to_db_update.items():
+        for field, update_info in field_to_db_update.items():
             new_value = request.form[field].strip()
             if new_value:
-                update_func(item_id, new_value)
+                update_info(item_id, new_value)
         return get_item_info(item_id)
     
     else:
@@ -79,7 +92,7 @@ def update_product():
 @admin_panel_bp.route('/admin_panel/view-inventory', methods=['POST']) # With 'GET' you can go directly to the url even without admin access or log in?
 def view_inventory():
     """
-    Renders the inventory products when the user is at the `/view-products` endpoint with a GET request.
+    Renders the inventory products when the user is at the `/admin_panel/view-inventory` endpoint with a POST request.
 
     args:
         - None
@@ -94,9 +107,12 @@ def view_inventory():
     return render_template('admin_panel.html', inventory=inventory)
 
 
+
+# Used for displaying item info after updating a product
 def get_item_info(item_id: int):
     """
     Get all the product data corresponding to the product item_id from the database.
+    Used to display data for the 'Update Product' panel
 
     args:
         - item_id: integer for product id
@@ -105,7 +121,7 @@ def get_item_info(item_id: int):
         - Render admin_panel page with product/item information
     """
     check = db.get_item_name_by_id(item_id)
-    if check is None: # Couldn't find item ID in database
+    if check is None: # Couldn't find item ID in database, send item_not_found error
         return render_template('admin_panel.html', item_not_found=True)
     name = check['item_name']
     info = db.get_item_info_by_id(item_id)['info']

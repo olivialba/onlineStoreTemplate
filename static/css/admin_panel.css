@@ -26,6 +26,11 @@
     margin-top: 20px;
 }
 
+#admin_warning {
+    width: 60%;
+    margin: 0 auto;
+}
+
 #admin_text {
     width: 200px;
     padding: 10px;
