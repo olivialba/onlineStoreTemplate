@@ -30,6 +30,19 @@ def index_page():
         return render_template('home.html', username=username, products=products, sessions=sessions)
     return render_template('index.html', username=username, products=products, sessions=sessions)
 
+@app.route('/about_us')
+def about_us():
+    """
+    Renders the about us page when the user is at the `/about_us` endpoint.
+
+    args:
+        - None
+
+    returns:
+        - None
+    """
+    return render_template('about_us.html', username=username)
+
 
 @app.route('/logout')
 def logout():
@@ -210,7 +223,7 @@ def reload_checkout_page():
             print("Cart is empty.")
         else:
             print("Sales added")
-        user_session.submit_cart() # Reset or Get total_cost - This needs to be here regardeless of if statement outcome
+    user_session.submit_cart() # Reset or Get total_cost - This needs to be here regardless of if statement outcome
     return render_template('checkout.html', sessions=sessions, sale_made=True, total_cost=user_session.total_cost, cart=user_session.get_cart_with_quantity())
         
 

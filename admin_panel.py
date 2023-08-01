@@ -4,7 +4,7 @@ from authentication.auth_tools import login_pipeline, update_passwords, hash_pas
 from flask import Blueprint, Flask, render_template, request
 from core_info import sessions, db
 
-admin_panel_bp = Blueprint('admin_panel', __name__)
+admin_panel_bp = Blueprint('admin_panel', __name__) 
 
 """
 Used to update product info
