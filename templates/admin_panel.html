@@ -15,14 +15,8 @@
             <div class="admin_panel_menu">
                 <h2>Add New Product</h2><br>
                 <!-- Errors message display -->
-                {% if empty_field %}
-                    <p class="alert alert-danger" id="admin_warning">Please complete all fields</p>
-                {% endif %}
-                {% if negative_number %}
-                    <p class="alert alert-danger" id="admin_warning">'Price' or 'Stock' can't be negative</p>
-                {% endif %}
-                {% if stock_not_integer %}
-                    <p class="alert alert-danger" id="admin_warning">'Stock' needs to be an integer</p>
+                {% if error_message %}
+                    <p class="alert alert-danger" id="admin_warning">{{ error_message }}</p>
                 {% endif %}
                 {% if product_added %}
                     <hr>

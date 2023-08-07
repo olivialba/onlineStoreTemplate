@@ -79,3 +79,51 @@ def generate_transaction_id(length) -> str:
         - A unique transaction ID as a string.
     """
     return str(uuid.uuid4())[:length]
+
+def check_float(value: str):
+    """
+    Check if a value can become a float
+
+    args:
+        - value
+
+    returns:
+        - Whether the value can be converted to a float or not
+    """
+    try:
+        value = float(value)
+        return value
+    except ValueError:
+        return None
+
+def admin_add_new_item(db, item_name: str, price: str, info: str, stock: str, image_url: str, category: str):
+    """
+    Add a new item into the database from admin_panel
+
+    args:
+        - item_name
+        - price
+        - info
+        - stock
+        - image_url
+        - category
+
+    returns:
+        - Whether the item was successfully added
+    """
+    if not item_name or not price or not info or not stock or not image_url or not category:
+        return False, "One or more fields are missing."
+    
+    price_float = check_float(price)
+    stock_float = check_float(stock)
+    if price_float is None or stock_float is None:
+        return False, "Price or stock value is not a valid float."
+    
+    if not stock_float.is_integer():
+        return False, "Stock value is not an integer."
+    
+    if price_float < 0 or stock_float < 0:
+        return False, "Price or stock can't be negative."
+    
+    db.insert_new_item(item_name, price, info, stock, image_url, category)
+    return True, "Item successfully added."

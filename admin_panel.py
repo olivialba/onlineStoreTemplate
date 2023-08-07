@@ -2,7 +2,7 @@
 
 from authentication.auth_tools import login_pipeline, update_passwords, hash_password
 from flask import Blueprint, Flask, render_template, request
-from core_info import sessions, db
+from core_info import sessions, db, admin_add_new_item
 
 admin_panel_bp = Blueprint('admin_panel', __name__) 
 
@@ -35,24 +35,22 @@ def add_product():
     modifies:
         - database/store_records.db: add a product to the inventory in the database.
     """
+    
+    
     item_name = request.form['itemname']
     price = request.form['price']
     info = request.form['info']
     stock = request.form['stock']
     image_url = request.form['image_url']
     category = request.form['category']
-    if not item_name or not price or not info or not stock or not image_url or not category: # All fields needs to be filled
-        return render_template('admin_panel.html', empty_field=True)
-    price = float(price)
-    stock = float(stock)
-    if not stock.is_integer(): # Stock needs to be full integer
-        return render_template('admin_panel.html', stock_not_integer=True)
-    if price < 0 or stock < 0: # Price and stock can't be negative, but can be zero
-        return render_template('admin_panel.html', negative_number=True)
-    db.insert_new_item(item_name, price, info, stock, image_url, category)
-    print("Product added")
-    return render_template('admin_panel.html', product_added=True)
-
+    
+    success, message = admin_add_new_item(db, item_name, price, info, stock, image_url, category)
+    if success:
+        print(message)
+        return render_template('admin_panel.html', product_added=True)
+    else:
+        print("Error: ", message)
+        return render_template('admin_panel.html', error_message=message)
 
 @admin_panel_bp.route('/admin_panel/update-product', methods=['POST'])
 def update_product():
