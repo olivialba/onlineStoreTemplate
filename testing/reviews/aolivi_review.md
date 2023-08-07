@@ -6,4 +6,4 @@
   - **Test Function Name:** `test_admin_add_product`
     - **Date Reviewed:** 08/07/2023
     - **Comments:**
-      - Test whether something can be successfully added to the database. Test works, even if values are changed.
+      - Test whether something can be successfully added to the database. Test works fine; you can change some values and the test will catch the errors.
