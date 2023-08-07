@@ -26,3 +26,8 @@ This script contains the unittests for the `database` module. The tests here are
 ## core_tests.py File
 
 This script contains the unittests for the `core` module. Similar to the `auth_tests.py` file, the tests here are limited in scope. Functions from the `session.py` are tested, specfically ones that handle session management. More thorough testing for specific user sessions, multiple users, and any functions from the `utils.py` file would be a beneficial addition from students.
+
+## admin_panel_tests.py File
+
+This script is similar to the `auth_tests.py` file. Functions used in the admin_panel.py that admin accounts use to manage the database are tested to see if they work correctly. 
+NOTE: It's important that a database already exists to test these functions, as these functions works directly with it. You can use `python3 database/reset_database.py` to create the database.
