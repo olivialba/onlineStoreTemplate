@@ -25,6 +25,7 @@ h3 {
 #login_button {
     background-color: #7c8acc;
     border-color: #ccc;
+	border-radius: 70%;
     color: rgb(255, 255, 255);
     width: 100px;
     font-weight: bold;
@@ -35,6 +36,7 @@ h3 {
 #register_button {
     background-color: #5b5e70;
     border-color: #ccc;
+    border-radius: 70%;
     color: rgb(236, 236, 236);
     width: 100px;
     font-weight: bold;
@@ -192,4 +194,57 @@ button:hover {
 
 .order_table tr, .order_table td, .order_table th {
     padding: 8px 10px;
+}
+
+/* About us page styles */
+
+.about-section {
+    padding: 20px;
+	border-right: inset gray;
+	border-left: outset gray;
+	border-radius: 50px 0px 50px 0px;
+	margin-bottom:50px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    background-color: lightblue;
+}
+
+.section-title {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.section-content {
+    width: 100%;
+}
+
+.centered-section {
+    margin-top: 100px;
+    text-align: center;
+}
+
+#about_page h1 {
+    text-align: center;
+    margin-bottom: 50px;
+    color: purple;
+    text-decoration: underline;
+}
+
+#about_page h3 {
+    text-align: left;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+#about_page ul {
+    list-style: none;
+}
+#about_page p {
+    text-align: left;
+    margin-bottom: 20px;
+}
+#about_page li {
+    text-align: left;
+    margin-bottom: 10px;
 }
