@@ -35,8 +35,6 @@ def add_product():
     modifies:
         - database/store_records.db: add a product to the inventory in the database.
     """
-    
-    
     item_name = request.form['itemname']
     price = request.form['price']
     info = request.form['info']
@@ -51,6 +49,7 @@ def add_product():
     else:
         print("Error: ", message)
         return render_template('admin_panel.html', error_message=message)
+
 
 @admin_panel_bp.route('/admin_panel/update-product', methods=['POST'])
 def update_product():
@@ -71,7 +70,7 @@ def update_product():
     # Button to search for product in database
     if 'button_send' in request.form and request.form['button_send'] == 'find_product':
         item_id = request.form['itemid']
-        return get_item_info(item_id)
+        return render_item_info(item_id)
     
     # Button to update a product in database
     elif 'button_send' in request.form and request.form['button_send'] == 'update_product':
@@ -80,25 +79,23 @@ def update_product():
             new_value = request.form[field].strip()
             if new_value:
                 update_info(item_id, new_value)
-        return get_item_info(item_id)
+        return render_item_info(item_id)
     
     else:
         print('Error: Could not detect button pressed. How were you even able to cause this error?')
         return render_template('admin_panel.html')
     
 
-@admin_panel_bp.route('/admin_panel/view-inventory', methods=['POST']) # With 'GET' you can go directly to the url even without admin access or log in?
+@admin_panel_bp.route('/admin_panel/view-inventory', methods=['POST'])
 def view_inventory():
     """
     Renders the inventory products when the user is at the `/admin_panel/view-inventory` endpoint with a POST request.
-
+    With 'GET' you can go directly to the url even without admin access or log in?
+    
     args:
         - None
 
     returns:
-        - None
-
-    modifies:
         - None
     """
     inventory = db.get_full_inventory()
@@ -106,8 +103,7 @@ def view_inventory():
 
 
 
-# Used for displaying item info after updating a product
-def get_item_info(item_id: int):
+def render_item_info(item_id: int):
     """
     Get all the product data corresponding to the product item_id from the database.
     Used to display data for the 'Update Product' panel
@@ -119,8 +115,11 @@ def get_item_info(item_id: int):
         - Render admin_panel page with product/item information
     """
     check = db.get_item_name_by_id(item_id)
-    if check is None: # Couldn't find item ID in database, send item_not_found error
+    
+    # Couldn't find item ID in database, send item_not_found error
+    if check is None:
         return render_template('admin_panel.html', item_not_found=True)
+    
     name = check['item_name']
     info = db.get_item_info_by_id(item_id)['info']
     price = db.get_item_price_by_id(item_id)['price']

@@ -3,6 +3,7 @@ from core.utils import generate_unique_id
 from datetime import datetime
 from testing.db_tests import test_init_db, test_get_inventory_exists, test_dict_factory_link, test_check_connection_threaded
 from testing.core_tests import test_init_sessions, test_add_new_session, test_get_session
+from testing.admin_panel_tests import test_admin_add_product
 import os
 
 # -------- Testing Function Constants --------
@@ -20,9 +21,12 @@ CORE_FUNCS = [test_init_sessions,
               test_add_new_session,
               test_get_session]
 
+ADMIN_FUNCS = [test_admin_add_product] # Admin Panel functions
+
 TESTING_FUNCTIONS = {"core": CORE_FUNCS,
                      "database": DB_FUNCS,
-                     "authentication": AUTH_FUNCS}
+                     "authentication": AUTH_FUNCS,
+                     "admin_panel": ADMIN_FUNCS}
 
 
 def run_tests(test_type: str, test_funcs: list, report_file_path: str) -> int:

@@ -1,6 +1,18 @@
 from database.db import Database
+from core.utils import admin_add_new_item
 
-def test_admin_add_product() :
+def test_admin_add_product():
+    """
+    Tests that you can successfully add items into the database using the admin_panel function.
+
+    args:
+        - None
+
+    returns:
+        - error_report: a tuple containing a boolean and a string, 
+          where the boolean is True if the test passed and False if it failed, 
+          and the string is the error report.
+    """
     db = Database("database/store_records.db")
     
     item_name = "test_itemname"
