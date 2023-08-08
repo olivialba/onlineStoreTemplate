@@ -2,8 +2,8 @@
 
 ## Tests Reviewed
 
-- **Test Source File:** [tests/auth_tests.py](../../tests/auth_tests.py)
-  - **Test Function Name:** `test_hash_password_generates_salt`
-    - **Date Reviewed:** 07/01/2023
+- **Test Source File:** [testing/admin_panel_tests.py](../../testing/admin_panel_tests.py)
+  - **Test Function Name:** `test_admin_add_product`
+    - **Date Reviewed:** 08/08/2023
     - **Comments:**
-      - This only tests whether something is returned, not whether it was generated correctly.
+      - Test ran well, does not result in any errors. 
