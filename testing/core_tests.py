@@ -37,7 +37,7 @@ def test_add_new_session() -> tuple:
           and the string is the error report.
     """
 
-    db = Database("database/store_records.db")
+    db = Database("../database/store_records.db")
     sessions = Sessions()
     sessions.add_new_session("test", db)
 
@@ -61,7 +61,7 @@ def test_get_session() -> tuple:
           and the string is the error report.
     """
 
-    db = Database("database/store_records.db")
+    db = Database("../database/store_records.db")
     sessions = Sessions()
     sessions.add_new_session("test", db)
     session = sessions.get_session("test")
@@ -86,7 +86,7 @@ def test_get_session_username() -> tuple:
           and the string is the error report.
     """
 
-    db = Database("database/store_records.db")
+    db = Database("../database/store_records.db")
     sessions = Sessions()
     sessions.add_new_session("test", db)
     session = sessions.get_session("test")
@@ -111,7 +111,7 @@ def test_get_session_db() -> tuple:
           and the string is the error report.
     """
 
-    db = Database("database/store_records.db")
+    db = Database("../database/store_records.db")
     sessions = Sessions()
     sessions.add_new_session("test", db)
     session = sessions.get_session("test")
