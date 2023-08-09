@@ -15,7 +15,7 @@ def test_init_db(db: Database = None) -> tuple:
           and the string is the error report.
     """
 
-    db = Database("../database/store_records.db") if db is None else db
+    db = Database("database/store_records.db") if db is None else db
 
     if db.database_path != "database/store_records.db":
         error = f"Error in test_init_db: Database path is not correct.\n  - Actual: {db.database_path}"
@@ -37,7 +37,7 @@ def test_get_inventory_exists(db: Database = None) -> tuple:
           and the string is the error report.
     """
 
-    db = Database("../database/store_records.db") if db is None else db
+    db = Database("database/store_records.db") if db is None else db
     full_inventory = db.get_full_inventory()
 
     if len(full_inventory) == 0:
@@ -57,7 +57,7 @@ def test_dict_factory_link(db: Database = None) -> tuple:
     returns:
         - error_report: a tuple containing a boolean and a string,
     """
-    db = Database("../database/store_records.db") if db is None else db
+    db = Database("database/store_records.db") if db is None else db
     row_factory = db.connection.row_factory
 
     if row_factory != dict_factory:
@@ -78,7 +78,7 @@ def test_check_connection_threaded(db: Database = None) -> tuple:
         - error_report: a tuple containing a boolean and a string,
     """
 
-    db = Database("../database/store_records.db") if db is None else db
+    db = Database("database/store_records.db") if db is None else db
     connection_is_threaded = db.connection.isolation_level is None
 
     if connection_is_threaded:
