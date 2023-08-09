@@ -25,6 +25,7 @@ def index_page():
     returns:
         - None
     """
+    global products
     products = db.get_full_inventory() # Reload Inventory in case a new product was just added
     if username != 'default': # If a user is logged in, re-route to show home.html
         return render_template('home.html', username=username, products=products, sessions=sessions)
@@ -93,6 +94,9 @@ def login():
         - sessions: adds a new session to the sessions object
 
     """
+    global products
+    products = db.get_full_inventory() # Reload Inventory in case a new product was just added    
+    
     user = request.form['username']
     password = request.form['password']
     if login_pipeline(user, password):
